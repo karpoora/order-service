@@ -3,6 +3,8 @@ package com.plantwoo.order.controller;
 import com.plantwoo.order.model.Order;
 import com.plantwoo.order.service.OrderService;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -15,6 +17,13 @@ public class OrderController {
 
     @Autowired
     OrderService orderService;
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
+    @GetMapping("/test")
+    public String getUserTest(){
+        LOGGER.info("in orderService Test API");
+        return "success";
+    }
 
     @PostMapping("/order")
     Mono<Order> create(@RequestBody Order order){
@@ -42,7 +51,8 @@ public class OrderController {
     }
 
     @GetMapping("/orders/{customerId}")
-    Flux<Order> getOrders(@RequestParam String customerId){
+    Flux<Order> getOrders(@PathVariable String customerId){
+        LOGGER.info("Get Order List for Customer Id: {}", customerId);
         return orderService.getOrders(customerId);
     }
 }
