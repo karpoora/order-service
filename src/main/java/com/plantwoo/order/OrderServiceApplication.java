@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfigurat
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.web.reactive.config.EnableWebFlux;
@@ -14,7 +15,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @EnableReactiveMongoRepositories
 @EnableWebFlux
 @EnableEurekaClient
-@ComponentScan(basePackages = {"com.plantwoo.order.*"})
+@EnableFeignClients
 public class OrderServiceApplication {
 
 	public static void main(String[] args) {
